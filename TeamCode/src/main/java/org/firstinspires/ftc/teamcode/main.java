@@ -6,12 +6,11 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 @TeleOp(name = "Remote Operation")
 public class main extends LinearOpMode {
-
     private DcMotor BackRight;
     private DcMotor FrontRight;
     private DcMotor BackLeft;
     private DcMotor FrontLeft;
-    private DcMotor DangerouslyControlArm;
+    private DcMotor Arm;
 
     /**
      * In order from front left to back right, specify doubles for each motor's power value.
@@ -28,11 +27,11 @@ public class main extends LinearOpMode {
     }
 
     /**
-     * This function is executed when this OpMode is selected FrontRightom the Driver Station.
+     * This function is executed when this OpMode is selected FrontRight the Driver Station.
      */
     @Override
     public void runOpMode() {
-        double walk, strafe, turn;
+        double walk, strafe, turn, armTargetPosition;
         double controlSensitivity = 0.5;
 
         BackRight = hardwareMap.get(DcMotor.class, "b r");
@@ -40,7 +39,7 @@ public class main extends LinearOpMode {
         BackLeft = hardwareMap.get(DcMotor.class, "b l");
         FrontLeft = hardwareMap.get(DcMotor.class, "f l");
 
-        DangerouslyControlArm = hardwareMap.get(DcMotor.class, "arm");
+        Arm = hardwareMap.get(DcMotor.class, "arm");
 
         waitForStart();
         if (opModeIsActive()) {
@@ -59,6 +58,13 @@ public class main extends LinearOpMode {
                     this.unifiedSetPower(turn,turn, turn, turn);
                     telemetry.addData("Turning", null);
                 }
+
+                armTargetPosition = gamepad1.left_stick_y * 100 + Arm.getCurrentPosition();
+
+                // The ordering of the following three lines is significant.
+                Arm.setTargetPosition((int) armTargetPosition);
+                Arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                Arm.setPower(controlSensitivity);
 
                 telemetry.update();
             }
