@@ -19,11 +19,12 @@ public class arm extends LinearOpMode {
     waitForStart();
     if (opModeIsActive()) {
       while (opModeIsActive()) {
-        double targetPosition = gamepad1.right_stick_y * 537.6; // 537.6t = 360d. 249t = arm is parallel to the ground
+        // 537.6t = 360d. 249t = arm is parallel to the ground
+        double targetPosition = gamepad1.right_stick_y * 537.6;
 
-        Arm.setTargetPosition((int) targetPosition); // Sets Target Tick Position
+        Arm.setTargetPosition((int) targetPosition);
         Arm.setPower(0.5);
-        telemetry.addData("Motor was told to spin to " + spin + " and spun to " + Arm.getCurrentPosition(),null);
+        telemetry.addData("Motor was told to spin to " + targetPosition + " and spun to " + Arm.getCurrentPosition(),null);
         telemetry.update();
       }
     }
