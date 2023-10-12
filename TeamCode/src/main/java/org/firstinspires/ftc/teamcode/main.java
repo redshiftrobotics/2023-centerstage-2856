@@ -27,6 +27,17 @@ public class main extends LinearOpMode {
     }
 
     /**
+     * math.clamp from java 21
+     * @param value
+     * @param min
+     * @param max
+     * @return
+     */
+    public static double mathClamp(double value, double min, double max) {
+        return Math.max(min, Math.min(max, value));
+    }
+
+    /**
      * This function is executed when this OpMode is selected FrontRight the Driver Station.
      */
     @Override
@@ -56,7 +67,8 @@ public class main extends LinearOpMode {
                     this.unifiedSetPower(turn,turn, turn, turn);
                 }
 
-                armTargetPosition = gamepad1.left_stick_y * 100 + Arm.getCurrentPosition();
+                armTargetPosition = mathClamp(gamepad1.left_stick_y * 100 + Arm.getCurrentPosition(), -1000, -150);
+                telemetry.addData("Arm target position = " + armTargetPosition, null);
 
                 // The ordering of the following three lines is significant.
                 Arm.setTargetPosition((int) armTargetPosition);
