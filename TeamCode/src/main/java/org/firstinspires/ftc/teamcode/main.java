@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import org.firstinspires.ftc.teamcode.config;
 
 @TeleOp(name = "Remote Operation")
 public class main extends LinearOpMode {
@@ -43,7 +44,7 @@ public class main extends LinearOpMode {
     @Override
     public void runOpMode() {
         double walk, strafe, turn, armTargetPosition;
-        double controlSensitivity = 0.5;
+        double controlSensitivity = config.ControlSensitivity;
 
         BackRight = hardwareMap.get(DcMotor.class, "b r");
         FrontRight = hardwareMap.get(DcMotor.class, "f r");
@@ -67,13 +68,13 @@ public class main extends LinearOpMode {
                     this.unifiedSetPower(turn,turn, turn, turn);
                 }
 
-                armTargetPosition = mathClamp(gamepad1.left_stick_y * 100 + Arm.getCurrentPosition(), -1000, -150);
+                armTargetPosition = mathClamp(gamepad1.left_stick_y * 1000 + Arm.getCurrentPosition(), config.ArmMinLimit, config.ArmMaxLimit);
                 telemetry.addData("Arm target position = " + armTargetPosition, null);
 
                 // The ordering of the following three lines is significant.
                 Arm.setTargetPosition((int) armTargetPosition);
                 Arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                Arm.setPower(controlSensitivity);
+                Arm.setPower(config.ArmSensitivity);
 
                 telemetry.addData("F/B", walk);
                 telemetry.addData("L/R", strafe);
