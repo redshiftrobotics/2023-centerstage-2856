@@ -50,13 +50,10 @@ public class main extends LinearOpMode {
 
                 if (Math.abs(walk) > Math.abs(strafe)) {
                     this.unifiedSetPower(-walk, walk,-walk, walk);
-                    telemetry.addData("F/B", null);
                 } else if (Math.abs(strafe) > Math.abs(turn)) {
-                    this.unifiedSetPower(-strafe, strafe, strafe, -strafe); // RL is broken
-                    telemetry.addData("R/L", null);
+                    this.unifiedSetPower(-strafe, strafe, strafe, -strafe); // RL is broken (maybe)?
                 } else {
                     this.unifiedSetPower(turn,turn, turn, turn);
-                    telemetry.addData("Turning", null);
                 }
 
                 armTargetPosition = gamepad1.left_stick_y * 100 + Arm.getCurrentPosition();
@@ -66,6 +63,11 @@ public class main extends LinearOpMode {
                 Arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 Arm.setPower(controlSensitivity);
 
+                telemetry.addData("F/B", walk);
+                telemetry.addData("L/R", strafe);
+                telemetry.addData("T/N", turn);
+                telemetry.addData("ARM TGT", armTargetPosition);
+                telemetry.addData("ARM POS", Arm.getCurrentPosition());
                 telemetry.update();
             }
         }
