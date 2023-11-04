@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author Michael Lesirge
  */
-@Autonomous(name = "Main Auto")
+@Autonomous(name = "(!) Main Auto")
 public class MainAuto extends LinearOpMode {
 
     private final ElapsedTime runtime = new ElapsedTime();
@@ -32,10 +32,10 @@ public class MainAuto extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        leftFrontDrive = hardwareMap.get(DcMotor.class, "FL");
-        leftBackDrive = hardwareMap.get(DcMotor.class, "BL");
-        rightFrontDrive = hardwareMap.get(DcMotor.class, "FR");
-        rightBackDrive = hardwareMap.get(DcMotor.class, "BR");
+        leftFrontDrive = hardwareMap.get(DcMotor.class, "f l");
+        leftBackDrive = hardwareMap.get(DcMotor.class, "b l");
+        rightFrontDrive = hardwareMap.get(DcMotor.class, "f r");
+        rightBackDrive = hardwareMap.get(DcMotor.class, "b r");
 
         // Set if motor is reversed
         leftFrontDrive.setDirection(Constants.DriveTrainConstants.leftFrontDriveDirection);
