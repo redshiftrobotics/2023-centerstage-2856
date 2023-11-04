@@ -47,26 +47,22 @@ public class main extends LinearOpMode {
         waitForStart();
         if (opModeIsActive()) {
             while (opModeIsActive()) {
-                final double horizontal = gamepad1.left_stick_x * config.ControlSensitivity; // lat
-                final double vertical = -gamepad1.left_stick_x * config.ControlSensitivity; // axial
-                final double bearing = gamepad1.right_stick_y * config.ControlSensitivity;
+                final double axial = gamepad1.left_stick_y * config.ControlSensitivity; // lat
+                final double lateral = -gamepad1.right_stick_x * config.ControlSensitivity; // axial
+                final double yaw = gamepad1.right_stick_y * config.ControlSensitivity;
 
-                double leftFrontPower = vertical + horizontal + bearing;
-                double rightFrontPower = vertical - horizontal - bearing;
-                double leftBackPower = vertical - horizontal + bearing;
-                double rightBackPower = vertical + horizontal - bearing;
+                double leftFrontPower = axial + lateral + yaw;
+                double rightFrontPower = axial - lateral - yaw;
+                double leftBackPower = axial - lateral + yaw;
+                double rightBackPower = axial + lateral - yaw;
 
                 unifiedSetPower(leftFrontPower, rightFrontPower, leftBackPower, rightBackPower);
 
-                if (gamepad1.a) {
-                    Arm.setTargetPosition(3388);
-                } else {
-                    Arm.setTargetPosition(
-                            Arm.getCurrentPosition()
-                                    + 2000
-                                    * (int) gamepad2.left_stick_y
-                    );
-                }
+                Arm.setTargetPosition(
+                        Arm.getCurrentPosition()
+                                + 1024
+                                * (int) gamepad2.left_stick_y
+                );
 
                 // works according to tech toolbox Arm.scaleRange(0, 1);
                 // The ordering of the following 2 functions is significant
@@ -79,4 +75,3 @@ public class main extends LinearOpMode {
         }
     }
 }
-//-3388 arm drop position

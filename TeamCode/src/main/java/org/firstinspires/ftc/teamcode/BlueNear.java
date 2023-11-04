@@ -14,8 +14,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author Michael Lesirge
  */
-@Autonomous(name = "(!) Main Auto")
-public class MainAuto extends LinearOpMode {
+@Autonomous(name = "Blue Near")
+public class BlueNear extends LinearOpMode {
 
     private final ElapsedTime runtime = new ElapsedTime();
 
@@ -63,8 +63,11 @@ public class MainAuto extends LinearOpMode {
         waitForStart();
         runtime.reset();
         if (opModeIsActive()) {
+
+            // pivot left
+
             telemetry.addData("Status", "Run Time: %s", runtime.toString());
-            driveForwardInches(12);
+            driveRightInches(44);
         }
     }
 
