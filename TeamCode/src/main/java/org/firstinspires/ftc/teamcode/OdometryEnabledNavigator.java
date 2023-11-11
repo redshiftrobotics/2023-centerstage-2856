@@ -1,11 +1,14 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import java.util.concurrent.TimeUnit;
 
-public class OdometryEnabledNavigator {
+public abstract class OdometryEnabledNavigator extends LinearOpMode{
     private final ElapsedTime runtime = new ElapsedTime();
 
     private DcMotor leftFrontDrive;
@@ -19,6 +22,31 @@ public class OdometryEnabledNavigator {
 
     public void driveForwardInches(double inchesToGo) {
         if (inchesToGo == 0) return;
+
+        leftFrontDrive = hardwareMap.get(DcMotor.class, "f l");
+        leftBackDrive = hardwareMap.get(DcMotor.class, "b l");
+        rightFrontDrive = hardwareMap.get(DcMotor.class, "f r");
+        rightBackDrive = hardwareMap.get(DcMotor.class, "b r");
+
+        // Set if motor is reversed
+        leftFrontDrive.setDirection(Constants.DriveTrainConstants.leftFrontDriveDirection);
+        leftBackDrive.setDirection(Constants.DriveTrainConstants.leftBackDriveDirection);
+        rightFrontDrive.setDirection(Constants.DriveTrainConstants.rightFrontDriveDirection);
+        rightBackDrive.setDirection(Constants.DriveTrainConstants.rightBackDriveDirection);
+
+        // Enable or disable braking
+        leftFrontDrive.setZeroPowerBehavior(Constants.DriverConstants.wheelMotorZeroPowerBehaviorDefault);
+        leftBackDrive.setZeroPowerBehavior(Constants.DriverConstants.wheelMotorZeroPowerBehaviorDefault);
+        rightFrontDrive.setZeroPowerBehavior(Constants.DriverConstants.wheelMotorZeroPowerBehaviorDefault);
+        rightBackDrive.setZeroPowerBehavior(Constants.DriverConstants.wheelMotorZeroPowerBehaviorDefault);
+
+        leftEncoder = hardwareMap.get(DcMotor.class, "LE");
+        centerEncoder = hardwareMap.get(DcMotor.class, "CE");
+        rightEncoder = hardwareMap.get(DcMotor.class, "RE");
+
+        leftEncoder.setDirection(DcMotorSimple.Direction.FORWARD);
+        centerEncoder.setDirection(DcMotorSimple.Direction.FORWARD);
+        rightEncoder.setDirection(DcMotorSimple.Direction.REVERSE);
 
         leftFrontDrive.setZeroPowerBehavior(Constants.DriverConstants.wheelMotorZeroPowerBehaviorDefault);
         leftBackDrive.setZeroPowerBehavior(Constants.DriverConstants.wheelMotorZeroPowerBehaviorDefault);
@@ -73,6 +101,31 @@ public class OdometryEnabledNavigator {
 
     public void driveLeftInches(double inchesToGo) {
         if (inchesToGo == 0) return;
+
+        leftFrontDrive = hardwareMap.get(DcMotor.class, "f l");
+        leftBackDrive = hardwareMap.get(DcMotor.class, "b l");
+        rightFrontDrive = hardwareMap.get(DcMotor.class, "f r");
+        rightBackDrive = hardwareMap.get(DcMotor.class, "b r");
+
+        // Set if motor is reversed
+        leftFrontDrive.setDirection(Constants.DriveTrainConstants.leftFrontDriveDirection);
+        leftBackDrive.setDirection(Constants.DriveTrainConstants.leftBackDriveDirection);
+        rightFrontDrive.setDirection(Constants.DriveTrainConstants.rightFrontDriveDirection);
+        rightBackDrive.setDirection(Constants.DriveTrainConstants.rightBackDriveDirection);
+
+        // Enable or disable braking
+        leftFrontDrive.setZeroPowerBehavior(Constants.DriverConstants.wheelMotorZeroPowerBehaviorDefault);
+        leftBackDrive.setZeroPowerBehavior(Constants.DriverConstants.wheelMotorZeroPowerBehaviorDefault);
+        rightFrontDrive.setZeroPowerBehavior(Constants.DriverConstants.wheelMotorZeroPowerBehaviorDefault);
+        rightBackDrive.setZeroPowerBehavior(Constants.DriverConstants.wheelMotorZeroPowerBehaviorDefault);
+
+        leftEncoder = hardwareMap.get(DcMotor.class, "LE");
+        centerEncoder = hardwareMap.get(DcMotor.class, "CE");
+        rightEncoder = hardwareMap.get(DcMotor.class, "RE");
+
+        leftEncoder.setDirection(DcMotorSimple.Direction.FORWARD);
+        centerEncoder.setDirection(DcMotorSimple.Direction.FORWARD);
+        rightEncoder.setDirection(DcMotorSimple.Direction.REVERSE);
 
         leftFrontDrive.setZeroPowerBehavior(Constants.DriverConstants.wheelMotorZeroPowerBehaviorDefault);
         leftBackDrive.setZeroPowerBehavior(Constants.DriverConstants.wheelMotorZeroPowerBehaviorDefault);
