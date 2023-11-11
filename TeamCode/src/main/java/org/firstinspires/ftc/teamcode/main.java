@@ -49,7 +49,7 @@ public class main extends LinearOpMode {
             while (opModeIsActive()) {
                 final double axial = gamepad1.left_stick_y * config.ControlSensitivity; // lat
                 final double lateral = -gamepad1.right_stick_x * config.ControlSensitivity; // axial
-                final double yaw = gamepad1.right_stick_y * config.ControlSensitivity;
+                final double yaw = gamepad1.right_stick_x * config.ControlSensitivity;// Rotation
 
                 double leftFrontPower = axial + lateral + yaw;
                 double rightFrontPower = axial - lateral - yaw;
