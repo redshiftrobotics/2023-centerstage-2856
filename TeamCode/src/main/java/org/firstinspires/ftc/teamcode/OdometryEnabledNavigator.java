@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import java.util.concurrent.TimeUnit;
 
-public abstract class OdometryEnabledNavigator extends LinearOpMode{
+public abstract class OdometryEnabledNavigator extends LinearOpMode {
     private final ElapsedTime runtime = new ElapsedTime();
 
     private DcMotor leftFrontDrive;
