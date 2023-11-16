@@ -15,7 +15,8 @@ public class main extends LinearOpMode {
     private DcMotor BackLeft;
     private DcMotor FrontLeft;
     private DcMotor Arm;
-    private CRServo AirplaneLauncher;
+    private Servo AirplaneLauncher;
+    private CRServo Intake;
 
     /**
      * In order from front left to back right, specify doubles for each motor's power value.
@@ -42,7 +43,8 @@ public class main extends LinearOpMode {
         FrontLeft = hardwareMap.get(DcMotor.class, "f l");
         Arm = hardwareMap.get(DcMotor.class, "arm");
 
-        AirplaneLauncher = hardwareMap.get(CRServo.class, "airplane");
+        AirplaneLauncher = hardwareMap.get(Servo.class, "airplane");
+        Intake = hardwareMap.get(CRServo.class, "intake");
 
         waitForStart();
         if (opModeIsActive()) {
@@ -68,6 +70,14 @@ public class main extends LinearOpMode {
                 // The ordering of the following 2 functions is significant
                 Arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 Arm.setPower(config.ArmSensitivity);
+
+                if (gamepad2.a) {
+                    Intake.setPower(-0.25);
+                } else if (gamepad2.b) {
+                    Intake.setPower(0.25);
+                } else {
+                    Intake.setPower(0);
+                }
 
                 telemetry.addData("Arm Position: ", Arm.getTargetPosition());
                 telemetry.update();
