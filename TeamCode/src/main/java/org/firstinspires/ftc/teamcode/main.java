@@ -5,8 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
-
-import org.firstinspires.ftc.teamcode.config;
+import java.util.concurrent.TimeUnit;
 
 @TeleOp(name = "Remote Operation")
 public class main extends LinearOpMode {
@@ -20,10 +19,10 @@ public class main extends LinearOpMode {
 
     /**
      * In order from front left to back right, specify doubles for each motor's power value.
-     * @param frontLeftPower
-     * @param frontRightPower
-     * @param backLeftPower
-     * @param backRightPower
+     * @param frontLeftPower Power level for the Front Left motor
+     * @param frontRightPower Power level for the Front Right motor
+     * @param backLeftPower Power level for the Rear Left motor
+     * @param backRightPower Power level for the Rear Right motor
      */
     private void unifiedSetPower(double frontLeftPower, double frontRightPower, double backLeftPower, double backRightPower) {
         FrontLeft.setPower(frontLeftPower);
@@ -34,9 +33,10 @@ public class main extends LinearOpMode {
 
     /**
      * This function is executed when this OpMode is selected FrontRight the Driver Station.
+     * Throws InterruptedException because I don't want an ugly try catch block when we use sleep.
      */
     @Override
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException {
         BackRight = hardwareMap.get(DcMotor.class, "b r");
         FrontRight = hardwareMap.get(DcMotor.class, "f r");
         BackLeft = hardwareMap.get(DcMotor.class, "b l");
@@ -61,9 +61,9 @@ public class main extends LinearOpMode {
                 unifiedSetPower(leftFrontPower, rightFrontPower, leftBackPower, rightBackPower);
 
                 Arm.setTargetPosition(
-                        Arm.getCurrentPosition()
-                                + 1024
-                                * (int) gamepad2.left_stick_y
+                    Arm.getCurrentPosition()
+                    + 1024
+                    * (int) gamepad2.left_stick_y
                 );
 
                 // works according to tech toolbox Arm.scaleRange(0, 1);
@@ -77,6 +77,12 @@ public class main extends LinearOpMode {
                     Intake.setPower(0.25);
                 } else {
                     Intake.setPower(0);
+                }
+
+                if (gamepad2.y) {
+                    AirplaneLauncher.setPosition(-0.5);
+                    TimeUnit.SECONDS.sleep(1);
+                    AirplaneLauncher.setPosition(0.0);
                 }
 
                 telemetry.addData("Arm Position: ", Arm.getTargetPosition());
