@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "Red Far")
+@Autonomous(name = "[Park] Red Far")
 public class RedFar extends OdometryEnabledNavigator {
     //private final OdometryEnabledNavigator navigator;
     private final ElapsedTime runtime = new ElapsedTime();

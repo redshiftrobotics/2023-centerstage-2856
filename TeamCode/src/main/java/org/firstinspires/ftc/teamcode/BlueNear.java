@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author Michael Lesirge
  */
-@Autonomous(name = "Blue Near")
+@Autonomous(name = "[Park] Blue Near")
 public class BlueNear extends LinearOpMode {
 
     private final ElapsedTime runtime = new ElapsedTime();
