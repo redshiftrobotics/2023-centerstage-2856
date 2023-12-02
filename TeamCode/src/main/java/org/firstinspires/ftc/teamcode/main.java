@@ -49,7 +49,8 @@ public class main extends LinearOpMode {
         waitForStart();
         if (opModeIsActive()) {
             while (opModeIsActive()) {
-                double sensitivity = config.ControlSensitivity;// - (1 - gamepad1.right_trigger); //slowmode
+                final double slowModeModifier = (gamepad1.right_trigger == 1) ? 0.5: 1;
+                final double sensitivity = config.ControlSensitivity * slowModeModifier;
 
                 final double axial = -gamepad1.right_stick_x * sensitivity; // Rotation
                 final double lateral = -gamepad1.left_stick_x * sensitivity; //ForwardBack
@@ -61,6 +62,10 @@ public class main extends LinearOpMode {
                 double rightBackPower = axial + lateral - yaw;
 
                 if (gamepad1.a) { // Handbrake
+                    FrontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                    FrontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                    BackLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                    BackRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
                     unifiedSetPower(0, 0, 0, 0);
                 } else {
                     unifiedSetPower(leftFrontPower, rightFrontPower, leftBackPower, rightBackPower);
