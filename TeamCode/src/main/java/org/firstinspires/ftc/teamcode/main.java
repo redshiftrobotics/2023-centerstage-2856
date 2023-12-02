@@ -49,16 +49,22 @@ public class main extends LinearOpMode {
         waitForStart();
         if (opModeIsActive()) {
             while (opModeIsActive()) {
-                final double axial = -gamepad1.left_stick_x * config.ControlSensitivity; // Rotation
-                final double lateral = -gamepad1.right_stick_x * config.ControlSensitivity; //ForwardBack
-                final double yaw = gamepad1.right_stick_y * config.ControlSensitivity;// Strafe
+                double sensitivity = config.ControlSensitivity;// - (1 - gamepad1.right_trigger); //slowmode
+
+                final double axial = -gamepad1.right_stick_x * sensitivity; // Rotation
+                final double lateral = -gamepad1.left_stick_x * sensitivity; //ForwardBack
+                final double yaw = gamepad1.left_stick_y * sensitivity;// Strafe
 
                 double leftFrontPower = axial + lateral + yaw;
                 double rightFrontPower = axial - lateral - yaw;
                 double leftBackPower = axial - lateral + yaw;
                 double rightBackPower = axial + lateral - yaw;
 
-                unifiedSetPower(leftFrontPower, rightFrontPower, leftBackPower, rightBackPower);
+                if (gamepad1.a) { // Handbrake
+                    unifiedSetPower(0, 0, 0, 0);
+                } else {
+                    unifiedSetPower(leftFrontPower, rightFrontPower, leftBackPower, rightBackPower);
+                }
 
                 Arm.setTargetPosition(
                     Arm.getCurrentPosition()
