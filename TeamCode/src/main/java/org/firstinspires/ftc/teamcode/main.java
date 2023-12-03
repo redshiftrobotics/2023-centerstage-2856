@@ -68,6 +68,10 @@ public class main extends LinearOpMode {
                     BackRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
                     unifiedSetPower(0, 0, 0, 0);
                 } else {
+                    FrontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                    FrontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                    BackLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                    BackRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
                     unifiedSetPower(leftFrontPower, rightFrontPower, leftBackPower, rightBackPower);
                 }
 
