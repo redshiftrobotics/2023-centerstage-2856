@@ -66,9 +66,6 @@ public abstract class OdometryEnabledNavigator extends LinearOpMode {
 
         double change = 0;
 
-//        telemetry.addData("Raw Encoder Inches", "Left: %4.2f, Right: %4.2f", startInchesL, startInchesR);
-//        telemetry.addData("Change Inches", "Change: %4.2f, Target: %4.2f", change, distanceUntilStop);
-
         while (change < distanceUntilStop) {
             final double currentInchesL = ticksToInch(leftEncoder.getCurrentPosition());
             final double currentInchesR = ticksToInch(rightEncoder.getCurrentPosition());
@@ -77,11 +74,6 @@ public abstract class OdometryEnabledNavigator extends LinearOpMode {
             final double changeR = currentInchesR - startInchesR;
 
             change = Math.abs((changeL + changeR) / 2);
-
-//            telemetry.addData("Status", "Run Time: %s", runtime.toString());
-//            telemetry.addData("Encoder Inches", "Left: %4.2f, Right: %4.2f", currentInchesL, currentInchesR);
-//            telemetry.addData("Change Inches", "Change: %4.2f, Target: %4.2f", change, distanceUntilStop);
-//            telemetry.update();
         }
 
         leftFrontDrive.setPower(0);
@@ -143,18 +135,10 @@ public abstract class OdometryEnabledNavigator extends LinearOpMode {
 
         double change = 0;
 
-//        telemetry.addData("Raw Encoder Inches", "Center: %4.2f", startInches);
-//        telemetry.addData("Change Inches", "Change: %4.2f, Target: %4.2f", change, distanceUntilStop);
-
         while (change < distanceUntilStop) {
             final double currentInches = ticksToInch(centerEncoder.getCurrentPosition());
 
             change = Math.abs(currentInches - startInches);
-
-//            telemetry.addData("Status", "Run Time: %s", runtime.toString());
-//            telemetry.addData("Encoder Inches", "Center: %4.2f", currentInches);
-//            telemetry.addData("Change Inches", "Change: %4.2f, Target: %4.2f", change, distanceUntilStop);
-//            telemetry.update();
         }
 
         leftFrontDrive.setPower(0);
@@ -166,8 +150,6 @@ public abstract class OdometryEnabledNavigator extends LinearOpMode {
         leftBackDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFrontDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBackDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-//        telemetry.clear();
     }
 
     public void driveRightInches(double inchesToGo) {
@@ -217,10 +199,6 @@ public abstract class OdometryEnabledNavigator extends LinearOpMode {
         final double endTime = now + time;
         while (runtime.now(TimeUnit.SECONDS) < endTime) {
             now = runtime.now(TimeUnit.SECONDS);
-
-//            telemetry.addData("Status", "Run Time: %s", runtime.toString());
-//            telemetry.addData("Time Left", endTime - now);
-//            telemetry.update();
         }
 
         leftFrontDrive.setPower(0);
@@ -232,7 +210,5 @@ public abstract class OdometryEnabledNavigator extends LinearOpMode {
         leftBackDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFrontDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBackDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-//        telemetry.clear();
     }
 }
