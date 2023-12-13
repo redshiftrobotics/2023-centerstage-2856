@@ -52,14 +52,14 @@ public class main extends LinearOpMode {
                 final double slowModeModifier = (gamepad1.right_trigger == 1) ? 0.5: 1;
                 final double sensitivity = config.ControlSensitivity * slowModeModifier;
 
-                final double axial = -gamepad1.right_stick_x; // Rotation
-                final double lateral = -gamepad1.left_stick_x; //ForwardBack
-                final double yaw = gamepad1.left_stick_y; // Strafe
+                final double rotation = -gamepad1.left_stick_x;
+                final double strafe = gamepad1.right_stick_x;
+                final double drive = gamepad1.left_stick_y; // Forwards and Backwards
 
-                double leftFrontPower = (axial + lateral + yaw) * sensitivity;
-                double rightFrontPower = (axial - lateral - yaw) * sensitivity;
-                double leftBackPower = (axial - lateral + yaw) * sensitivity;
-                double rightBackPower = (axial + lateral - yaw) * sensitivity;
+                double leftFrontPower = (rotation - strafe + drive) * sensitivity;
+                double rightFrontPower = (rotation - strafe - drive) * sensitivity;
+                double leftBackPower = (rotation + strafe + drive) * sensitivity;
+                double rightBackPower = (rotation + strafe - drive) * sensitivity;
 
                 if (gamepad1.a) { // Handbrake
                     FrontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
