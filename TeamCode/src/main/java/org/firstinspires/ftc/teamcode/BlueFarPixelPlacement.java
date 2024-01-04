@@ -24,6 +24,7 @@ public class BlueFarPixelPlacement extends OdometryEnabledNavigator {
             telemetry.addData("Status", "Run Time: %s", runtime.toString());
             // Drive to backdrop
             driveLeftInches(29);
+            try {TimeUnit.SECONDS.sleep(15);} catch (InterruptedException error) {while (opModeIsActive()) {telemetry.addData("Error: ", error);}return;}
             driveBackwardsInches(90);
             // Drop pixel
             // Target Position is -3306
