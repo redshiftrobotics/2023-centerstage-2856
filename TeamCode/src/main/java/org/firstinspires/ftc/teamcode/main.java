@@ -9,12 +9,25 @@ import java.util.concurrent.TimeUnit;
 
 @TeleOp(name = "Remote Operation")
 public class main extends LinearOpMode {
+    /** Back right drive motor */
     private DcMotor BackRight;
+
+    /** Front right drive motor */
     private DcMotor FrontRight;
+
+    /** Back left drive motor */
     private DcMotor BackLeft;
+
+    /** Front left drive motor */
     private DcMotor FrontLeft;
+
+    /** Main arm Motor */
     private DcMotor Arm;
+
+    /** Airplane Launcher release servo */
     private Servo AirplaneLauncher;
+
+    /** Intake brush servo */
     private CRServo Intake;
 
     /**
@@ -49,12 +62,14 @@ public class main extends LinearOpMode {
         waitForStart();
         if (opModeIsActive()) {
             while (opModeIsActive()) {
+                // Get the drive motor sensitivity from config. If the slowmode button is pressed down, half speed.
                 final double slowModeModifier = (gamepad1.right_trigger == 1) ? 0.5: 1;
                 final double sensitivity = config.ControlSensitivity * slowModeModifier;
 
+                // Inputs
                 final double rotation = -gamepad1.left_stick_x;
                 final double strafe = gamepad1.right_stick_x;
-                final double drive = gamepad1.left_stick_y; // Forwards and Backwards
+                final double drive = gamepad1.left_stick_y;
 
                 double leftFrontPower = (rotation - strafe + drive) * sensitivity;
                 double rightFrontPower = (rotation - strafe - drive) * sensitivity;
@@ -81,8 +96,7 @@ public class main extends LinearOpMode {
                     * (int) gamepad2.left_stick_y
                 );
 
-                // works according to tech toolbox Arm.scaleRange(0, 1);
-                // The ordering of the following 2 functions is significant
+                // The ordering of the following 2 functions is significant.
                 Arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 Arm.setPower(config.ArmSensitivity);
 
