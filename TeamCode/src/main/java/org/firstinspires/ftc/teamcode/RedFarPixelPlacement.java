@@ -26,14 +26,16 @@ public class RedFarPixelPlacement extends OdometryEnabledNavigator {
             waitSeconds(17);
 
             // Drive to backdrop
-            driveRightInches(29);
-            driveBackwardsInches(90);
+            driveRightInches(28);
+            driveBackwardsInches(80);
 
             // Drop pixel
             arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             while (opModeIsActive()) {
+                // The ordering herein is significant
                 arm.setPower(-1);
                 arm.setTargetPosition(Constants.ArmConstants.armUpSetPoint);
+                arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             }
         }
     }

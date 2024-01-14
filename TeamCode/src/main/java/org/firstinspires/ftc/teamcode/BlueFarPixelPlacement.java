@@ -25,14 +25,15 @@ public class BlueFarPixelPlacement extends OdometryEnabledNavigator {
             waitSeconds(20);
 
             // Drive to backdrop
-            driveLeftInches(29);
-            driveBackwardsInches(90);
+            driveLeftInches(28);
+            driveBackwardsInches(80);
 
             // Drop pixel
-            arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             while (opModeIsActive()) {
+                // The ordering herein is significant
                 arm.setPower(-1);
                 arm.setTargetPosition(Constants.ArmConstants.armUpSetPoint);
+                arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             }
         }
     }
