@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  * @author Aceius Elms
  */
 public class Constants {
-
     public static class ArmConstants {
         // What power level the amr is set to. Between 0 and 1 with one being max power.
         // This does not control directly speed, it controls how much power the motor will use to get to a desired position
@@ -26,10 +25,10 @@ public class Constants {
         public static final int maxPosition = 3800 + armLocationShift;
 
         // Placing set point (Relative to start facing forwards)
-        public static final int armUpSetPoint = 2000 + armLocationShift;
+        public static final int armUpSetPoint = -3125 + armLocationShift;
 
         // Picking up set point (Relative to start facing forwards)
-        public static final int armDownSetPoint = -800 + armLocationShift;
+        public static final int armDownSetPoint = -3125 + armLocationShift;
 
         // In case arm gearing changes
         public static final DcMotor.Direction armDirection = DcMotor.Direction.FORWARD;
@@ -98,6 +97,6 @@ public class Constants {
         public static final double MOVEMENT_BUFFER_INCHES = 1.1;
 
         // How fast to spin motors while going specified distances in auto. The slower you go the more precise your distance will be.
-        public static final double AUTO_DRIVE_POWER = 0.25;
+        public static final double AUTO_DRIVE_POWER = 0.5;
     }
 }

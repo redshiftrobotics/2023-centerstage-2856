@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import java.util.concurrent.TimeUnit;
 
-@Autonomous(name = "[Prototype] Blue Far")
+@Autonomous(name = "[Auto] Blue Far")
 public class BlueFarPixelPlacement extends OdometryEnabledNavigator {
     //private final OdometryEnabledNavigator navigator;
     private final ElapsedTime runtime = new ElapsedTime();
@@ -22,15 +22,17 @@ public class BlueFarPixelPlacement extends OdometryEnabledNavigator {
         runtime.reset();
         if (opModeIsActive()) {
             telemetry.addData("Status", "Run Time: %s", runtime.toString());
+            waitSeconds(20);
+
             // Drive to backdrop
             driveLeftInches(29);
-            try {TimeUnit.SECONDS.sleep(15);} catch (InterruptedException error) {while (opModeIsActive()) {telemetry.addData("Error: ", error);}return;}
             driveBackwardsInches(90);
+
             // Drop pixel
-            // Target Position is -3306
+            arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             while (opModeIsActive()) {
-                arm.setPower(-0.5);
-                arm.setTargetPosition(-3306);
+                arm.setPower(-1);
+                arm.setTargetPosition(Constants.ArmConstants.armUpSetPoint);
             }
         }
     }
