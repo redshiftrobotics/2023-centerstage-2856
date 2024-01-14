@@ -2,20 +2,17 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
-import org.firstinspires.ftc.robotcore.external.Const;
 
 import java.util.concurrent.TimeUnit;
 
 /**
  * @author Michael Lesirge
  */
-@Autonomous(name = "[Park] Blue Near")
-public class BlueNear extends LinearOpMode {
+@Autonomous(name = "[Deprecated] Blue Near")
+public class ZZZ_BlueNear extends LinearOpMode {
 
     private final ElapsedTime runtime = new ElapsedTime();
 

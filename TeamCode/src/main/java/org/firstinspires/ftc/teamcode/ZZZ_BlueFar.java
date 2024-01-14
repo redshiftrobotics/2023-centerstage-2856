@@ -4,10 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import java.util.concurrent.TimeUnit;
-
-@Autonomous(name = "[Park] Red Far")
-public class RedFar extends OdometryEnabledNavigator {
+@Autonomous(name = "[Deprecated] Blue Far")
+public class ZZZ_BlueFar extends OdometryEnabledNavigator {
     //private final OdometryEnabledNavigator navigator;
     private final ElapsedTime runtime = new ElapsedTime();
 
@@ -23,8 +21,7 @@ public class RedFar extends OdometryEnabledNavigator {
         if (opModeIsActive()) {
             telemetry.addData("Status", "Run Time: %s", runtime.toString());
             driveForwardInches(30);
-            waitSeconds(15);
-            driveRightInches(90);
+            driveLeftInches(90);
         }
     }
 }
