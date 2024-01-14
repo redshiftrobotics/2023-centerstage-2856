@@ -211,4 +211,15 @@ public abstract class OdometryEnabledNavigator extends LinearOpMode {
         rightFrontDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBackDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
+
+    public void waitSeconds(double seconds) {
+        try {
+            TimeUnit.SECONDS.sleep(15);
+        } catch (InterruptedException error) {
+            while (opModeIsActive()) {
+                telemetry.addData("FATAL: Error Sleeping! ", error);
+            }
+            return;
+        }
+    }
 }

@@ -25,7 +25,7 @@ public class RedFarPixelPlacement extends OdometryEnabledNavigator {
             telemetry.addData("Status", "Run Time: %s", runtime.toString());
             // Drive to backdrop
             driveRightInches(29);
-            try {TimeUnit.SECONDS.sleep(15);} catch (InterruptedException error) {while (opModeIsActive()) {telemetry.addData("Error: ", error);}return;}
+            waitSeconds(15);
             driveBackwardsInches(90);
             // Drop pixel
             // Target Position is -3306

@@ -23,8 +23,7 @@ public class RedFar extends OdometryEnabledNavigator {
         if (opModeIsActive()) {
             telemetry.addData("Status", "Run Time: %s", runtime.toString());
             driveForwardInches(30);
-            try {
-                TimeUnit.SECONDS.sleep(15);} catch (InterruptedException error) {while (opModeIsActive()) {telemetry.addData("Error: ", error);}return;}
+            waitSeconds(15);
             driveRightInches(90);
         }
     }
