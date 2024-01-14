@@ -27,7 +27,7 @@ public class RedFarPixelPlacement extends OdometryEnabledNavigator {
 
             // Drive to backdrop
             driveRightInches(28);
-            driveBackwardsInches(80);
+            driveBackwardsInches(83);
 
             // Drop pixel
             arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);

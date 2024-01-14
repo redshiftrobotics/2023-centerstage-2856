@@ -26,7 +26,7 @@ public class BlueFarPixelPlacement extends OdometryEnabledNavigator {
 
             // Drive to backdrop
             driveLeftInches(28);
-            driveBackwardsInches(80);
+            driveBackwardsInches(83);
 
             // Drop pixel
             while (opModeIsActive()) {
