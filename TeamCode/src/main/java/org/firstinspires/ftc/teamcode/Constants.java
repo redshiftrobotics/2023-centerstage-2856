@@ -25,7 +25,7 @@ public class Constants {
         public static final int maxPosition = 3800 + armLocationShift;
 
         // Placing set point (Relative to start facing forwards)
-        public static final int armUpSetPoint = -3125 + armLocationShift;
+        public static final int armUpSetPoint = -3200 + armLocationShift;
 
         // Picking up set point (Relative to start facing forwards)
         public static final int armDownSetPoint = -3125 + armLocationShift;
